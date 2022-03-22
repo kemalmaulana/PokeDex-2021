@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dipay PokeDex</string>
+    <string name="avatar_pokemon">Avatar Pokemon</string>
+    <string name="weight">Weight</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="loading">Loading…</string>
+    <string name="error">Something went wrong</string>
+</resources>
