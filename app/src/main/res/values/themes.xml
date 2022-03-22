@@ -16,4 +16,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="ThemeOverlay.AppTheme.BottomNavigationView" parent="@style/ThemeOverlay.MaterialComponents">
+        <item name="colorSurface">@null</item>
+        <item name="elevationOverlayEnabled">false</item>
+    </style>
+
 </resources>

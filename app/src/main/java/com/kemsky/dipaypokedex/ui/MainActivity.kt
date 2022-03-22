@@ -1,7 +1,10 @@
 package com.kemsky.dipaypokedex.ui
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.kemsky.dipaypokedex.R
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding?.bottomNavigatinView?.setupWithNavController(navController)
+        binding?.bottomNavigatinView?.itemActiveIndicatorColor = ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.black))
     }
 
     override fun onDestroy() {

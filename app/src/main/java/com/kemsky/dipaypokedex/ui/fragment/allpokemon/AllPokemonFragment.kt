@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kemsky.dipaypokedex.R
 import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.databinding.FragmentAllPokemonBinding
 import com.kemsky.dipaypokedex.ui.fragment.allpokemon.adapter.AllPokemonAdapter
@@ -42,8 +44,9 @@ class AllPokemonFragment : Fragment() {
     }
 
     private fun configureToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding?.toolbar)
         binding?.toolbar?.title = "All Pokemon"
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).setSupportActionBar(binding?.toolbar)
     }
 
     private fun configureRecyclerView() {
