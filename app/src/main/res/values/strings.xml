@@ -6,4 +6,5 @@
     <string name="favorite">Favorite</string>
     <string name="loading">Loading…</string>
     <string name="error">Something went wrong</string>
+    <string name="search">Search</string>
 </resources>
