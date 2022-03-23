@@ -22,6 +22,7 @@ import com.kemsky.dipaypokedex.helper.setImageSrcFromUrlWithLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.job
 import timber.log.Timber
@@ -70,22 +71,24 @@ class DetailActivity : AppCompatActivity() {
     private fun configureUi() {
         lifecycleScope.launchWhenStarted {
             pokeId?.let {
-                viewModel.fetchDetailPokemon(it).filterNotNull().collect { detail ->
+                viewModel.fetchDetailPokemon(it).combine(viewModel.fetchSpeciesPokemon(it)) { detail, species ->
                     with(binding!!) {
                         when (detail) {
                             is Resource.Loading -> {
                                 content.visibility = View.GONE
                                 loadingProgress.visibility = View.VISIBLE
+                                binding?.textFlavour?.text = getString(R.string.loading)
                             }
                             is Resource.Error -> {
                                 content.visibility = View.GONE
                                 loadingProgress.visibility = View.GONE
-
+                                binding?.textFlavour?.text = getString(R.string.error)
                             }
                             else -> {
                                 content.visibility = View.VISIBLE
                                 loadingProgress.visibility = View.GONE
 
+                                // Detail data like stats, type, et cetera
                                 detail.data?.let { data ->
                                     avatarPokemon.setImageSrcFromUrlWithLoader(
                                         getImageUrl(data.id.toString()),
@@ -179,32 +182,21 @@ class DetailActivity : AppCompatActivity() {
                                     }
 
                                 }
-                            }
-                        }
-                    }
-                }
 
-                viewModel.fetchSpeciesPokemon(it).filterNotNull().collect { species ->
-                    when (species) {
-                        is Resource.Loading -> {
-                            binding?.textFlavour?.text = getString(R.string.loading)
-                        }
-                        is Resource.Error -> {
-                            binding?.textFlavour?.text = getString(R.string.error)
-                        }
-                        is Resource.Success -> {
-                            val sb = StringBuffer()
-                            species.data?.flavorTextEntries?.distinctBy { text ->
-                                text.flavorText
-                            }?.forEachIndexed { index, flavorTextEntry ->
-                                if (index < 3) {
-                                    sb.append("${flavorTextEntry.flavorText.replace("\n", " ")} ")
+                                // Species Flavor Text
+                                val sb = StringBuffer()
+                                species.data?.flavorTextEntries?.distinctBy { text ->
+                                    text.flavorText
+                                }?.forEachIndexed { index, flavorTextEntry ->
+                                    if (index < 3) {
+                                        sb.append("${flavorTextEntry.flavorText.replace("\n", " ")} ")
+                                    }
                                 }
+                                binding?.textFlavour?.text = sb.toString()
                             }
-                            binding?.textFlavour?.text = sb.toString()
                         }
                     }
-                }
+                }.filterNotNull().collect()
             }
         }
 
@@ -238,8 +230,6 @@ class DetailActivity : AppCompatActivity() {
     private fun configureFavoriteButton() {
         lifecycleScope.launchWhenStarted {
             viewModel.getSingleFav(pokeId)?.collect { model ->
-                Timber.e(model?.id.toString())
-                Timber.e(pokeId.toString())
                 if (model?.id != pokeId) {
                     model?.let {
                         viewModel.addToFavorite(it)
