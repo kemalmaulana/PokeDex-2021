@@ -1,7 +1,6 @@
 package com.kemsky.dipaypokedex.data.room
 
 import androidx.room.*
-import com.kemsky.dipaypokedex.data.model.PokemonDetailModel
 import com.kemsky.dipaypokedex.data.room.model.FavPokemonModel
 import kotlinx.coroutines.flow.Flow
 

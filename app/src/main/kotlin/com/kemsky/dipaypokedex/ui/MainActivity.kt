@@ -1,6 +1,5 @@
 package com.kemsky.dipaypokedex.ui
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
