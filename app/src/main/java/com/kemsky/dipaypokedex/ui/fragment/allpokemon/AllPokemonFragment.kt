@@ -52,7 +52,7 @@ class AllPokemonFragment : Fragment() {
     }
 
     private fun configureToolbar() {
-        binding?.toolbar?.title = "All Pokemon"
+        binding?.toolbar?.title = getString(R.string.pokedex)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).setSupportActionBar(binding?.toolbar)
     }

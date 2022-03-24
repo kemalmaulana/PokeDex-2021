@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kemsky.dipaypokedex.R
 import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.data.model.PokemonAllModel
 import com.kemsky.dipaypokedex.databinding.FragmentFavPokemonBinding
@@ -44,7 +45,7 @@ class FavPokemonFragment : Fragment() {
 
     private fun configureToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding?.toolbar)
-        binding?.toolbar?.title = "Favorite Pokemon"
+        binding?.toolbar?.title = getString(R.string.pokedex)
     }
 
     private fun configureRecyclerView() {

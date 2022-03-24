@@ -13,6 +13,7 @@ import com.kemsky.dipaypokedex.data.model.PokemonAllModel
 import com.kemsky.dipaypokedex.databinding.ItemPokemonBinding
 import com.kemsky.dipaypokedex.helper.setImageSrcFromUrlWithLoader
 import com.kemsky.dipaypokedex.ui.activity.detailpokemon.DetailActivity
+import java.text.DecimalFormat
 import java.util.*
 
 
@@ -20,6 +21,8 @@ class AllPokemonAdapter :
     PagingDataAdapter<PokemonAllModel.Result, AllPokemonAdapter.AllPokemonViewHolder>(
         AllPokemonComparator
     ) {
+
+    private val formatter: DecimalFormat = DecimalFormat("#000")
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,8 +50,7 @@ class AllPokemonAdapter :
 
             textTitle.text = pokemonName
             pokemonId.also {
-                textNumber.text = String.format("#%s", it)
-//                avatarPokemon.loadImage(getImageUrl(it))
+                textNumber.text = String.format("#%s", formatter.format(it.toInt()))
                 avatarPokemon.setImageSrcFromUrlWithLoader(getImageUrl(it), lavLoader)
             }
             layoutTitle.setBackgroundColor(ContextCompat.getColor(this.root.context, R.color.purple_200))

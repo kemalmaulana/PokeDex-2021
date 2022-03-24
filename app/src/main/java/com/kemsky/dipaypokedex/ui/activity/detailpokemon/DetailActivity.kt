@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.DecimalFormat
 import javax.inject.Inject
 import kotlin.math.ceil
 
@@ -50,6 +51,8 @@ class DetailActivity : AppCompatActivity() {
     private val pokeName by lazy {
         intent.extras?.getString("poke_name")?.replaceFirstChar(Char::titlecase)
     }
+
+    private val formatter: DecimalFormat = DecimalFormat("#000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,42 +146,43 @@ class DetailActivity : AppCompatActivity() {
                                             when (stats.stat.name) {
                                                 "hp" -> {
                                                     progressHp.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtHp.text = stats.baseStat.toString()
                                                 }
                                                 "attack" -> {
                                                     progressAtk.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtAtk.text = stats.baseStat.toString()
                                                 }
                                                 "defense" -> {
                                                     progressDef.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtDef.text = stats.baseStat.toString()
                                                 }
                                                 "special-attack" -> {
                                                     progressSpAtk.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtSpAtk.text = stats.baseStat.toString()
                                                 }
                                                 "special-defense" -> {
                                                     progressSpDef.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtSpDef.text = stats.baseStat.toString()
                                                 }
                                                 else -> {
+                                                    Timber.e("SPD: ${ceil(stats.baseStat.toDouble() / 255 * 100).toInt()}")
                                                     progressSpd.setProgressCompat(
-                                                        ceil(stats.baseStat.toDouble() / 255 * 100).toInt(),
+                                                        stats.baseStat,
                                                         true
                                                     )
                                                     txtSpd.text = stats.baseStat.toString()
@@ -233,7 +237,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val menuItem = menu?.findItem(R.id.pokemon_number)
         if (menuItem?.title.toString().equals("NUMBER", ignoreCase = true)) {
-            menuItem?.title = "#$pokeId"
+            menuItem?.title = String.format("#%s", formatter.format(pokeId))
         }
         return super.onPrepareOptionsMenu(menu)
     }

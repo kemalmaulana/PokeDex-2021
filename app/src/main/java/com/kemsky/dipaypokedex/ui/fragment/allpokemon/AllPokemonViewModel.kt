@@ -10,7 +10,7 @@ import com.kemsky.dipaypokedex.ui.fragment.allpokemon.adapter.AllPokemonDataSour
 
 class AllPokemonViewModel(private val repository: PokeRepository) : ViewModel() {
 
-    val listData = Pager(PagingConfig(pageSize = 25)) {
+    val listData = Pager(PagingConfig(pageSize = 9)) {
         AllPokemonDataSource(repository)
     }.flow.cachedIn(viewModelScope)
 

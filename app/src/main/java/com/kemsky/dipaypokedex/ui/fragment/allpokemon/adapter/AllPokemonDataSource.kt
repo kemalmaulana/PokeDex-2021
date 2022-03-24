@@ -15,7 +15,7 @@ class AllPokemonDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonAllModel.Result> {
         try {
             val currentLoadingPageKey = params.key ?: 0
-            val response = repository.getAllPokemon(limit = 25, offset = currentLoadingPageKey)
+            val response = repository.getAllPokemon(limit = 9, offset = currentLoadingPageKey)
             val responseData = mutableListOf<PokemonAllModel.Result>()
             response.body()?.let { model ->
                 responseData.addAll(model.results)
@@ -26,7 +26,7 @@ class AllPokemonDataSource(
             return LoadResult.Page(
                 data = responseData,
                 prevKey = prevKey,
-                nextKey = currentLoadingPageKey.plus(25)
+                nextKey = currentLoadingPageKey.plus(9)
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
