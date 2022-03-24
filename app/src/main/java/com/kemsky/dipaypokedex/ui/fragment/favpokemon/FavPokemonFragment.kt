@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.data.model.PokemonAllModel
 import com.kemsky.dipaypokedex.databinding.FragmentFavPokemonBinding
@@ -49,7 +49,7 @@ class FavPokemonFragment : Fragment() {
 
     private fun configureRecyclerView() {
         val pokemonAdapter = FavPokemonAdapter()
-        binding?.rvAllPokemon?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvAllPokemon?.layoutManager = GridLayoutManager(requireContext(), 3)
         binding?.rvAllPokemon?.setHasFixedSize(true)
 
         binding?.rvAllPokemon?.adapter = pokemonAdapter
@@ -64,6 +64,11 @@ class FavPokemonFragment : Fragment() {
                 }
                 pokemonAdapter.submitList(listFav)
             }
+        }
+
+        binding?.refresh?.setOnRefreshListener {
+            pokemonAdapter.notifyItemChanged(pokemonAdapter.itemCount -1)
+            binding?.refresh?.isRefreshing = false
         }
     }
 

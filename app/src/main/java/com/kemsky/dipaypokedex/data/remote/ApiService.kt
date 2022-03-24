@@ -52,7 +52,7 @@ interface ApiService {
                         .collector(ChuckerCollector(context))
                         .maxContentLength(250000L)
                         .redactHeaders(emptySet())
-                        .alwaysReadResponseBody(false)
+                        .alwaysReadResponseBody(true)
                         .build()
                 )
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)

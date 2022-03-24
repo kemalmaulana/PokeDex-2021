@@ -2,12 +2,10 @@ package com.kemsky.dipaypokedex.ui.fragment.allpokemon
 
 import android.app.SearchManager
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -71,6 +69,11 @@ class AllPokemonFragment : Fragment() {
                 pokemonAdapter.submitData(pagedData)
             }
         }
+
+        binding?.refresh?.setOnRefreshListener {
+            pokemonAdapter.refresh()
+            binding?.refresh?.isRefreshing = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -82,7 +85,6 @@ class AllPokemonFragment : Fragment() {
         if (searchItem != null) {
             searchView = searchItem.actionView as SearchView
             searchView.isIconified = true
-//            searchView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
             searchView.setIconifiedByDefault(true)
         }
 

@@ -1,5 +1,6 @@
 package com.kemsky.dipaypokedex.ui.fragment.favpokemon.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,7 +11,9 @@ import com.kemsky.dipaypokedex.R
 import com.kemsky.dipaypokedex.constant.AppConstant.getImageUrl
 import com.kemsky.dipaypokedex.data.model.PokemonAllModel
 import com.kemsky.dipaypokedex.databinding.ItemPokemonBinding
-import com.kemsky.dipaypokedex.helper.loadImage
+import com.kemsky.dipaypokedex.helper.setImageSrcFromUrlWithLoader
+import com.kemsky.dipaypokedex.ui.activity.detailpokemon.DetailActivity
+import java.util.*
 
 
 class FavPokemonAdapter :
@@ -35,13 +38,24 @@ class FavPokemonAdapter :
     inner class FavPokemonViewHolder(private var binding: ItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindPokemon(item: PokemonAllModel.Result) = with(binding) {
-            textTitle.text = item.name
 
-            item.url.substringAfterLast("pokemon/", "").also {
+            val pokemonName = item.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            val pokemonId = item.url.substringAfterLast("pokemon/", "").replace("/", "")
+
+            textTitle.text = pokemonName
+            pokemonId.also {
                 textNumber.text = String.format("#%s", it)
-                avatarPokemon.loadImage(getImageUrl(it))
+//                avatarPokemon.loadImage(getImageUrl(it))
+                avatarPokemon.setImageSrcFromUrlWithLoader(getImageUrl(it), lavLoader)
             }
             layoutTitle.setBackgroundColor(ContextCompat.getColor(this.root.context, R.color.purple_200))
+            cardPokemon.setOnClickListener { view ->
+                Intent(view.context, DetailActivity::class.java).also {
+                    it.putExtra("poke_id", pokemonId.toInt())
+                    it.putExtra("poke_name", pokemonName)
+                    view.context.startActivity(it)
+                }
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.IOException
 
 class DetailViewModel(
@@ -50,11 +51,12 @@ class DetailViewModel(
         }
     }
 
-    fun addToFavorite(pokemon: FavPokemonModel) {
+    suspend fun addToFavorite(pokemon: FavPokemonModel) {
         if (database.openHelper.writableDatabase.isOpen) {
+            Timber.e("Inserting ${pokemon.name}")
             val dao = database.favPokemonDao()
-            viewModelScope.launch {
-                dao.insertSingle(pokemon)
+            viewModelScope.launch(Dispatchers.IO) {
+            dao.insertSingle(pokemon)
             }
         }
     }
