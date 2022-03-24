@@ -22,6 +22,21 @@
                 android:layout_height="match_parent"
                 android:background="@color/purple_700">
 
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-64dp"
+                    android:layout_marginEnd="-32dp"
+                    android:foregroundTint="#34FFFFFF"
+                    android:tintMode="src_in"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_pokemon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/card_pokemon"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:srcCompat="@drawable/ic_pokeball_24"
+                    app:tint="#61FFFFFF" />
+
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     style="@style/Widget.MaterialComponents.Toolbar.Primary"
@@ -55,7 +70,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:orientation="horizontal"
-                            android:padding="12dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/btn_fav" />
@@ -66,8 +80,8 @@
                             android:layout_height="48dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
-                            android:elevation="2dp"
                             android:background="@drawable/custom_ripple_effect"
+                            android:elevation="2dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/ic_unfavorite_24"
@@ -202,7 +216,8 @@
                         <View
                             android:id="@+id/divider2"
                             android:layout_width="1dp"
-                            android:layout_height="140dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="16dp"
                             android:layout_marginBottom="24dp"
                             android:background="?android:attr/listDivider"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -215,11 +230,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="ATK"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/textView8"
                             app:layout_constraintEnd_toStartOf="@+id/divider2"
                             app:layout_constraintTop_toTopOf="@+id/divider2" />
 
@@ -227,80 +244,82 @@
                             android:id="@+id/textView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="DEF"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                            app:layout_constraintBottom_toTopOf="@+id/textView9"
+                            app:layout_constraintEnd_toStartOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/textView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="HP"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                            app:layout_constraintBottom_toTopOf="@+id/textView10"
+                            app:layout_constraintEnd_toStartOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/textView10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="SP-ATK"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                            app:layout_constraintBottom_toTopOf="@+id/textView11"
+                            app:layout_constraintEnd_toStartOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/textView11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="SP-DEF"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                            app:layout_constraintBottom_toTopOf="@+id/textView12"
+                            app:layout_constraintEnd_toStartOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="24dp"
                             android:text="SPD"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/purple_700"
                             android:textSize="12sp"
                             android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/txt_atk"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_def"
                             app:layout_constraintStart_toEndOf="@+id/divider2"
                             app:layout_constraintTop_toTopOf="@+id/divider2" />
 
@@ -309,60 +328,60 @@
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_atk" />
+                            app:layout_constraintBottom_toTopOf="@+id/txt_hp"
+                            app:layout_constraintStart_toEndOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/txt_hp"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_def" />
+                            app:layout_constraintBottom_toTopOf="@+id/txt_sp_atk"
+                            app:layout_constraintStart_toEndOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/txt_sp_atk"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_hp" />
+                            app:layout_constraintBottom_toTopOf="@+id/txt_sp_def"
+                            app:layout_constraintStart_toEndOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/txt_sp_def"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_sp_atk" />
+                            app:layout_constraintBottom_toTopOf="@+id/txt_spd"
+                            app:layout_constraintStart_toEndOf="@+id/divider2" />
 
                         <TextView
                             android:id="@+id/txt_spd"
                             android:layout_width="20dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="24dp"
                             android:text="99"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textSize="12sp"
-                            app:layout_constraintStart_toEndOf="@+id/divider2"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_sp_def" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider2" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
                             android:id="@+id/progress_atk"

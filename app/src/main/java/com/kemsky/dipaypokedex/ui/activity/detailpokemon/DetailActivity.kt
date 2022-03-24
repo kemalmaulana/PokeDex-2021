@@ -123,7 +123,6 @@ class DetailActivity : AppCompatActivity() {
                                                             R.color.white
                                                         )
                                                     )
-                                                    chipEndPadding = 12f
                                                     text =
                                                         it.type.name.replaceFirstChar(Char::titlecase)
                                                     chipBackgroundColor = colorByType(

@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_straighten_24.xml" value="0.2985" />
         <entry key="app/src/main/res/drawable/ic_unfavorite_24.xml" value="0.2985" />
         <entry key="app/src/main/res/drawable/outline_scale_20.xml" value="0.178" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1986552567237164" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/fragment_all_pokemon.xml" value="0.13994565217391305" />
         <entry key="app/src/main/res/layout/fragment_fav_pokemon.xml" value="0.13994565217391305" />
