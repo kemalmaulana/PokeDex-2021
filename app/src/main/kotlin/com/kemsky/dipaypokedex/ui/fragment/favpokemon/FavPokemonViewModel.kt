@@ -1,7 +1,6 @@
 package com.kemsky.dipaypokedex.ui.fragment.favpokemon
 
 import androidx.lifecycle.ViewModel
-import com.kemsky.dipaypokedex.data.model.PokemonDetailModel
 import com.kemsky.dipaypokedex.data.room.PokemonDatabase
 import com.kemsky.dipaypokedex.data.room.model.FavPokemonModel
 import kotlinx.coroutines.flow.Flow
