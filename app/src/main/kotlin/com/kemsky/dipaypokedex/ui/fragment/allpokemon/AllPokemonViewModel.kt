@@ -7,8 +7,11 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.kemsky.dipaypokedex.data.repository.PokeRepository
 import com.kemsky.dipaypokedex.ui.fragment.allpokemon.adapter.AllPokemonDataSource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AllPokemonViewModel(private val repository: PokeRepository) : ViewModel() {
+@HiltViewModel
+class AllPokemonViewModel @Inject constructor(private val repository: PokeRepository) : ViewModel() {
 
     val listData = Pager(PagingConfig(pageSize = 9)) {
         AllPokemonDataSource(repository)

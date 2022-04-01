@@ -6,13 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.kemsky.dipaypokedex.R
-import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.constant.AppConstant.colorByType
 import com.kemsky.dipaypokedex.constant.AppConstant.getImageUrl
 import com.kemsky.dipaypokedex.data.room.model.FavPokemonModel
@@ -30,17 +29,13 @@ import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.DecimalFormat
-import javax.inject.Inject
 import kotlin.math.ceil
 
 // Entry point dependency injection by dagger hilt
 @AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
-    // injecting dependency (viewmodelfactory)
-    @Inject
-    lateinit var factory: ViewModelFactory
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by viewModels()
 
     private var binding: ActivityDetailBinding? = null
 
@@ -61,9 +56,6 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding?.root)
 
         configureToolbar()
-
-        // instantiating viewmodel with viewmodelprovider with custom factory
-        viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
         configureUi()
     }
 
@@ -196,6 +188,8 @@ class DetailActivity : AppCompatActivity() {
                                     val sb = StringBuffer()
                                     species.data?.flavorTextEntries?.distinctBy { text ->
                                         text.flavorText
+                                    }?.filter { text ->
+                                        text.language.name == "en"
                                     }?.forEachIndexed { index, flavorTextEntry ->
                                         if (index < 3) {
                                             sb.append(
@@ -215,7 +209,7 @@ class DetailActivity : AppCompatActivity() {
                     }.filterNotNull().collect()
 
                 viewModel.getSingleFav(it)?.collect { model ->
-                    if(model?.id != null) {
+                    if (model?.id != null) {
                         binding?.btnFav?.setImageResource(R.drawable.ic_favorite_24)
                         binding?.btnFav?.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(

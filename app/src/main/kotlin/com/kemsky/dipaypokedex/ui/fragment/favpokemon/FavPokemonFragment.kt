@@ -6,25 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kemsky.dipaypokedex.R
-import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.data.model.PokemonAllModel
 import com.kemsky.dipaypokedex.databinding.FragmentFavPokemonBinding
 import com.kemsky.dipaypokedex.ui.fragment.favpokemon.adapter.FavPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavPokemonFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-    private lateinit var viewModel: FavPokemonViewModel
+    private val viewModel: FavPokemonViewModel by viewModels()
 
     private var binding: FragmentFavPokemonBinding? = null
 
@@ -33,7 +29,6 @@ class FavPokemonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFavPokemonBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this, factory)[FavPokemonViewModel::class.java]
         return binding?.root
     }
 

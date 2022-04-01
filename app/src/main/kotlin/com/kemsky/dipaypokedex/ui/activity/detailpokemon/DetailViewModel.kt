@@ -8,14 +8,17 @@ import com.kemsky.dipaypokedex.data.repository.PokeRepository
 import com.kemsky.dipaypokedex.data.room.PokemonDatabase
 import com.kemsky.dipaypokedex.data.room.model.FavPokemonModel
 import com.kemsky.dipaypokedex.helper.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.IOException
+import javax.inject.Inject
 
-class DetailViewModel(
+@HiltViewModel
+class DetailViewModel @Inject constructor(
     private val repository: PokeRepository,
     private val database: PokemonDatabase
 ) : ViewModel() {

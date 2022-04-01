@@ -1,7 +1,6 @@
 package com.kemsky.dipaypokedex.di
 
 import android.content.Context
-import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.data.remote.ApiService
 import com.kemsky.dipaypokedex.data.repository.PokeRepository
 import com.kemsky.dipaypokedex.data.repository.PokeRepositoryImpl
@@ -29,14 +28,6 @@ object AppModule {
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): PokemonDatabase =
         PokemonDatabase.getDatabase(context)
-
-    @Provides
-    fun provideViewModelProvider(
-        repository: PokeRepository,
-        database: PokemonDatabase
-    ): ViewModelFactory = ViewModelFactory(
-        repository, database
-    )
 
 
 }

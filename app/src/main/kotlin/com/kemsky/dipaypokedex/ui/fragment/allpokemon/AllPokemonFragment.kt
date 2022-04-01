@@ -7,27 +7,22 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kemsky.dipaypokedex.R
-import com.kemsky.dipaypokedex.ViewModelFactory
 import com.kemsky.dipaypokedex.databinding.FragmentAllPokemonBinding
 import com.kemsky.dipaypokedex.ui.fragment.allpokemon.adapter.AllPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class AllPokemonFragment : Fragment() {
 
-    @Inject
-    lateinit var factory: ViewModelFactory
-    private lateinit var viewModel: AllPokemonViewModel
+    private val viewModel: AllPokemonViewModel by viewModels()
 
     private var binding: FragmentAllPokemonBinding? = null
 
@@ -40,7 +35,6 @@ class AllPokemonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAllPokemonBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this, factory)[AllPokemonViewModel::class.java]
         return binding?.root
     }
 
