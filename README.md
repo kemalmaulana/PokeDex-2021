@@ -4,6 +4,7 @@
 * MVVM
 * Dagger Hilt
 * Retrofit REST API
+* Chuck Interceptor
 * Kotlin Coroutine
 * Kotlin Flow
 * Glide
