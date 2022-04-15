@@ -13,3 +13,9 @@
 * Navigation
 * Paging 3.0
 * Lottie Animation
+
+## Code Quality
+ This code has been checked by SonarQube
+
+![Text Result.](https://github.com/kemalmaulana/PokeDex-2021/blob/master/img/sonarqube.png?raw=true "Test Result")
+
