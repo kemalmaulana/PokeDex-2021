@@ -77,6 +77,9 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     kapt "com.google.dagger:hilt-compiler:2.42"
 
+    // Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
     // Viewmodel & Lifecycle
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"

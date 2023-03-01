@@ -1,13 +1,13 @@
-package com.kemsky.pokedex.ui.activity.detailpokemon
+package com.kemsky.pokedex.presentation.ui.activity.detailpokemon
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kemsky.pokedex.core.helper.Resource
 import com.kemsky.pokedex.data.model.PokemonDetailModel
 import com.kemsky.pokedex.data.model.PokemonSpeciesModel
-import com.kemsky.pokedex.data.repository.PokeRepository
 import com.kemsky.pokedex.data.room.PokemonDatabase
 import com.kemsky.pokedex.data.room.model.FavPokemonModel
-import com.kemsky.pokedex.helper.Resource
+import com.kemsky.pokedex.domain.usecase.detail.IPokemonDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: PokeRepository,
+    private val repository: IPokemonDetailRepository,
     private val database: PokemonDatabase
 ) : ViewModel() {
 

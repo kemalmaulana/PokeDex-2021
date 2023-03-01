@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.helper
+package com.kemsky.pokedex.core.helper
 
 import android.annotation.SuppressLint
 import android.content.Context

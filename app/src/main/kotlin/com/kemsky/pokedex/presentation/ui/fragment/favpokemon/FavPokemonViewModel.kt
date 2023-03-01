@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui.fragment.favpokemon
+package com.kemsky.pokedex.presentation.ui.fragment.favpokemon
 
 import androidx.lifecycle.ViewModel
 import com.kemsky.pokedex.data.room.PokemonDatabase

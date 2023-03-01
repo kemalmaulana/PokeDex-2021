@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui.fragment.allpokemon.adapter
+package com.kemsky.pokedex.presentation.ui.fragment.allpokemon.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kemsky.pokedex.R
-import com.kemsky.pokedex.constant.AppConstant.getImageUrl
+import com.kemsky.pokedex.core.constant.AppConstant.getImageUrl
 import com.kemsky.pokedex.data.model.PokemonAllModel
 import com.kemsky.pokedex.databinding.ItemPokemonBinding
-import com.kemsky.pokedex.helper.setImageSrcFromUrlWithLoader
-import com.kemsky.pokedex.ui.activity.detailpokemon.DetailActivity
+import com.kemsky.pokedex.core.helper.setImageSrcFromUrlWithLoader
+import com.kemsky.pokedex.presentation.ui.activity.detailpokemon.DetailActivity
 import java.text.DecimalFormat
 import java.util.*
 

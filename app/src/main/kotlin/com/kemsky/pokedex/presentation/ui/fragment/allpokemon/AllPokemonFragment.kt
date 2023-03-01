@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui.fragment.allpokemon
+package com.kemsky.pokedex.presentation.ui.fragment.allpokemon
 
 import android.app.SearchManager
 import android.content.Context
@@ -14,7 +14,7 @@ import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kemsky.pokedex.R
 import com.kemsky.pokedex.databinding.FragmentAllPokemonBinding
-import com.kemsky.pokedex.ui.fragment.allpokemon.adapter.AllPokemonAdapter
+import com.kemsky.pokedex.presentation.ui.fragment.allpokemon.adapter.AllPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

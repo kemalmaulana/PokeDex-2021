@@ -4,11 +4,13 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
-import com.kemsky.pokedex.constant.AppConstant.BASE_URL
+import com.kemsky.pokedex.core.constant.AppConstant.BASE_URL
 import com.kemsky.pokedex.data.model.PokemonAllModel
 import com.kemsky.pokedex.data.model.PokemonDetailModel
 import com.kemsky.pokedex.data.model.PokemonFormModel
 import com.kemsky.pokedex.data.model.PokemonSpeciesModel
+import com.kemsky.pokedex.data.remote.interceptor.AuthInterceptor
+import com.kemsky.pokedex.core.annotation.MustBeAuthenticated
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -37,6 +39,7 @@ interface ApiService {
     ): Response<PokemonFormModel>
 
     @GET("/api/v2/pokemon-species/{pokemonId}")
+    @MustBeAuthenticated
     suspend fun getSpeciesPokemon(
         @Path("pokemonId") pokemonId: Int
     ): Response<PokemonSpeciesModel>
@@ -55,6 +58,7 @@ interface ApiService {
                         .alwaysReadResponseBody(true)
                         .build()
                 )
+                .addInterceptor(AuthInterceptor(context.applicationContext))
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
                 .readTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
                 .writeTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)

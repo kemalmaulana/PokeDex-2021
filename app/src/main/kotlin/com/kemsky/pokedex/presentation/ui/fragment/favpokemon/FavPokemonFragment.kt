@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui.fragment.favpokemon
+package com.kemsky.pokedex.presentation.ui.fragment.favpokemon
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.kemsky.pokedex.R
 import com.kemsky.pokedex.data.model.PokemonAllModel
 import com.kemsky.pokedex.databinding.FragmentFavPokemonBinding
-import com.kemsky.pokedex.ui.fragment.favpokemon.adapter.FavPokemonAdapter
+import com.kemsky.pokedex.presentation.ui.fragment.favpokemon.adapter.FavPokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dipay Pokédex</string>
+    <string name="app_name">Pokédex-Android</string>
     <string name="pokedex">Pokédex</string>
     <string name="avatar_pokemon">Avatar Pokemon</string>
     <string name="weight">Weight</string>

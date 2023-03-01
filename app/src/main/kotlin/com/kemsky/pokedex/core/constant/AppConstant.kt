@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.constant
+package com.kemsky.pokedex.core.constant
 
 import android.content.Context
 import android.content.res.ColorStateList

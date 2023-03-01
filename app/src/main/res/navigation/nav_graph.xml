@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/allPokemonFragment"
-        android:name="com.kemsky.pokedex.ui.fragment.allpokemon.AllPokemonFragment"
+        android:name="com.kemsky.pokedex.presentation.ui.fragment.allpokemon.AllPokemonFragment"
         android:label="fragment_all_pokemon"
         tools:layout="@layout/fragment_all_pokemon" />
     <fragment
         android:id="@+id/favPokemonFragment"
-        android:name="com.kemsky.pokedex.ui.fragment.favpokemon.FavPokemonFragment"
+        android:name="com.kemsky.pokedex.presentation.ui.fragment.favpokemon.FavPokemonFragment"
         android:label="fragment_fav_pokemon"
         tools:layout="@layout/fragment_fav_pokemon" />
 </navigation>

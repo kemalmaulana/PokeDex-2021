@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui.activity.detailpokemon
+package com.kemsky.pokedex.presentation.ui.activity.detailpokemon
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -12,14 +12,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.kemsky.pokedex.R
-import com.kemsky.pokedex.constant.AppConstant.colorByType
-import com.kemsky.pokedex.constant.AppConstant.getImageUrl
+import com.kemsky.pokedex.core.constant.AppConstant.colorByType
+import com.kemsky.pokedex.core.constant.AppConstant.getImageUrl
 import com.kemsky.pokedex.data.room.model.FavPokemonModel
 import com.kemsky.pokedex.databinding.ActivityDetailBinding
-import com.kemsky.pokedex.helper.Resource
-import com.kemsky.pokedex.helper.decimetersToMeters
-import com.kemsky.pokedex.helper.hectogramsToKilograms
-import com.kemsky.pokedex.helper.setImageSrcFromUrlWithLoader
+import com.kemsky.pokedex.core.helper.Resource
+import com.kemsky.pokedex.core.helper.decimetersToMeters
+import com.kemsky.pokedex.core.helper.hectogramsToKilograms
+import com.kemsky.pokedex.core.helper.setImageSrcFromUrlWithLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.flow.collect

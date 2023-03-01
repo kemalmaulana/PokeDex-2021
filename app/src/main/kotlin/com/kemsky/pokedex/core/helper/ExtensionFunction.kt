@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.helper
+package com.kemsky.pokedex.core.helper
 
 import android.graphics.drawable.Drawable
 import android.view.View

@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.helper
+package com.kemsky.pokedex.core.helper
 
 sealed class Resource<T>(
     val data: T? = null,

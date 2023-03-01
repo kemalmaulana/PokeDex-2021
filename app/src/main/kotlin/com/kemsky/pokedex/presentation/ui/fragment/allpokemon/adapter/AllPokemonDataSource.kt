@@ -1,12 +1,12 @@
-package com.kemsky.pokedex.ui.fragment.allpokemon.adapter
+package com.kemsky.pokedex.presentation.ui.fragment.allpokemon.adapter
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.kemsky.pokedex.data.model.PokemonAllModel
-import com.kemsky.pokedex.data.repository.PokeRepository
+import com.kemsky.pokedex.domain.usecase.all.IPokemonAllRepository
 
 class AllPokemonDataSource(
-    private val repository: PokeRepository
+    private val repository: IPokemonAllRepository
 ) : PagingSource<Int, PokemonAllModel.Result>() {
     override fun getRefreshKey(state: PagingState<Int, PokemonAllModel.Result>): Int? {
         return null

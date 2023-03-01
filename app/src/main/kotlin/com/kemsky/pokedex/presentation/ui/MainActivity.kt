@@ -1,4 +1,4 @@
-package com.kemsky.pokedex.ui
+package com.kemsky.pokedex.presentation.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle

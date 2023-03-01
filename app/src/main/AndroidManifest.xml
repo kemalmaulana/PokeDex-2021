@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".presentation.ui.MainActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
             android:exported="true">
             <intent-filter>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.detailpokemon.DetailActivity"
+            android:name=".presentation.ui.activity.detailpokemon.DetailActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge"
             android:exported="false">
         </activity>
