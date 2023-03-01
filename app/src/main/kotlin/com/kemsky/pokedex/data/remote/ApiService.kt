@@ -1,6 +1,8 @@
 package com.kemsky.pokedex.data.remote
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import com.kemsky.pokedex.constant.AppConstant.BASE_URL
 import com.kemsky.pokedex.data.model.PokemonAllModel
@@ -45,14 +47,14 @@ interface ApiService {
         operator fun invoke(context: Context): ApiService {
             val gson = GsonBuilder().create()
             val client = OkHttpClient.Builder()
-//                .addInterceptor(
-//                    ChuckerInterceptor.Builder(context)
-//                        .collector(ChuckerCollector(context))
-//                        .maxContentLength(250000L)
-//                        .redactHeaders(emptySet())
-//                        .alwaysReadResponseBody(true)
-//                        .build()
-//                )
+                .addInterceptor(
+                    ChuckerInterceptor.Builder(context)
+                        .collector(ChuckerCollector(context))
+                        .maxContentLength(250000L)
+                        .redactHeaders(emptySet())
+                        .alwaysReadResponseBody(true)
+                        .build()
+                )
                 .connectTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
                 .readTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)
                 .writeTimeout(TIME_OUT.toLong(), TimeUnit.MILLISECONDS)

@@ -55,7 +55,7 @@ class DetailViewModel @Inject constructor(
     }
 
     suspend fun addToFavorite(pokemon: FavPokemonModel) {
-        if (database.getOpenHelper().writableDatabase.isOpen) {
+        if (database.openHelper.writableDatabase.isOpen) {
             Timber.e("Inserting ${pokemon.name}")
             val dao = database.favPokemonDao()
             viewModelScope.launch(Dispatchers.IO) {
@@ -65,7 +65,7 @@ class DetailViewModel @Inject constructor(
     }
 
     fun deleteFromFavorite(pokemon: FavPokemonModel) {
-        if (database.getOpenHelper().writableDatabase.isOpen) {
+        if (database.openHelper.writableDatabase.isOpen) {
             val dao = database.favPokemonDao()
             viewModelScope.launch {
                 dao.delete(pokemon)
