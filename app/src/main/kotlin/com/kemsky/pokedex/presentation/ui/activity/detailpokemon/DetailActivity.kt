@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.chip.Chip
 import com.kemsky.pokedex.R
 import com.kemsky.pokedex.core.constant.AppConstant.colorByType
@@ -67,158 +69,160 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun configureUi() {
-        lifecycleScope.launchWhenStarted {
-            pokeId?.let {
-                viewModel.fetchDetailPokemon(it)
-                    .combine(viewModel.fetchSpeciesPokemon(it)) { detail, species ->
-                        with(binding!!) {
-                            when (detail) {
-                                is Resource.Loading -> {
-                                    content.visibility = View.GONE
-                                    loadingProgress.visibility = View.VISIBLE
-                                    binding?.textFlavour?.text = getString(R.string.loading)
-                                }
-                                is Resource.Error -> {
-                                    content.visibility = View.GONE
-                                    loadingProgress.visibility = View.GONE
-                                    binding?.textFlavour?.text = getString(R.string.error)
-                                }
-                                else -> {
-                                    content.visibility = View.VISIBLE
-                                    loadingProgress.visibility = View.GONE
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                pokeId?.let {
+                    viewModel.fetchDetailPokemon(it)
+                        .combine(viewModel.fetchSpeciesPokemon(it)) { detail, species ->
+                            with(binding!!) {
+                                when (detail) {
+                                    is Resource.Loading -> {
+                                        content.visibility = View.GONE
+                                        loadingProgress.visibility = View.VISIBLE
+                                        binding?.textFlavour?.text = getString(R.string.loading)
+                                    }
+                                    is Resource.Error -> {
+                                        content.visibility = View.GONE
+                                        loadingProgress.visibility = View.GONE
+                                        binding?.textFlavour?.text = getString(R.string.error)
+                                    }
+                                    else -> {
+                                        content.visibility = View.VISIBLE
+                                        loadingProgress.visibility = View.GONE
 
-                                    // Detail data like stats, type, et cetera
-                                    detail.data?.let { data ->
-                                        avatarPokemon.setImageSrcFromUrlWithLoader(
-                                            getImageUrl(data.id.toString()),
-                                            lavLoader
-                                        )
-                                        btnFav.setOnClickListener { configureFavoriteButton() }
-                                        txtWeight.text = String.format(
-                                            "%s %s",
-                                            data.weight.hectogramsToKilograms().toString(),
-                                            "Kg"
-                                        )
-                                        txtHeight.text = String.format(
-                                            "%s %s",
-                                            data.height.decimetersToMeters().toString(),
-                                            "m"
-                                        )
+                                        // Detail data like stats, type, et cetera
+                                        detail.data?.let { data ->
+                                            avatarPokemon.setImageSrcFromUrlWithLoader(
+                                                getImageUrl(data.id.toString()),
+                                                lavLoader
+                                            )
+                                            btnFav.setOnClickListener { configureFavoriteButton() }
+                                            txtWeight.text = String.format(
+                                                "%s %s",
+                                                data.weight.hectogramsToKilograms().toString(),
+                                                "Kg"
+                                            )
+                                            txtHeight.text = String.format(
+                                                "%s %s",
+                                                data.height.decimetersToMeters().toString(),
+                                                "m"
+                                            )
 
-                                        if (!data.types.isNullOrEmpty()) {
-                                            data.types.forEach {
-                                                val chip = Chip(this@DetailActivity)
-                                                chip.apply {
-                                                    setTextColor(
-                                                        ContextCompat.getColor(
-                                                            this@DetailActivity,
-                                                            R.color.white
+                                            if (!data.types.isNullOrEmpty()) {
+                                                data.types.forEach {
+                                                    val chip = Chip(this@DetailActivity)
+                                                    chip.apply {
+                                                        setTextColor(
+                                                            ContextCompat.getColor(
+                                                                this@DetailActivity,
+                                                                R.color.white
+                                                            )
                                                         )
-                                                    )
-                                                    text =
-                                                        it.type.name.replaceFirstChar(Char::titlecase)
-                                                    chipBackgroundColor = colorByType(
+                                                        text =
+                                                            it.type.name.replaceFirstChar(Char::titlecase)
+                                                        chipBackgroundColor = colorByType(
+                                                            this@DetailActivity,
+                                                            it.type.name
+                                                        )
+                                                    }
+                                                    binding?.linearChip?.addView(chip)
+                                                }
+                                                content.setBackgroundColor(
+                                                    colorByType(
                                                         this@DetailActivity,
-                                                        it.type.name
-                                                    )
-                                                }
-                                                binding?.linearChip?.addView(chip)
+                                                        data.types[0].type.name
+                                                    ).defaultColor
+                                                )
                                             }
-                                            content.setBackgroundColor(
-                                                colorByType(
-                                                    this@DetailActivity,
-                                                    data.types[0].type.name
-                                                ).defaultColor
-                                            )
-                                        }
 
 
-                                        data.stats?.forEach { stats ->
-                                            when (stats.stat.name) {
-                                                "hp" -> {
-                                                    progressHp.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtHp.text = stats.baseStat.toString()
+                                            data.stats?.forEach { stats ->
+                                                when (stats.stat.name) {
+                                                    "hp" -> {
+                                                        progressHp.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtHp.text = stats.baseStat.toString()
+                                                    }
+                                                    "attack" -> {
+                                                        progressAtk.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtAtk.text = stats.baseStat.toString()
+                                                    }
+                                                    "defense" -> {
+                                                        progressDef.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtDef.text = stats.baseStat.toString()
+                                                    }
+                                                    "special-attack" -> {
+                                                        progressSpAtk.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtSpAtk.text = stats.baseStat.toString()
+                                                    }
+                                                    "special-defense" -> {
+                                                        progressSpDef.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtSpDef.text = stats.baseStat.toString()
+                                                    }
+                                                    else -> {
+                                                        Timber.e("SPD: ${ceil(stats.baseStat.toDouble() / 255 * 100).toInt()}")
+                                                        progressSpd.setProgressCompat(
+                                                            stats.baseStat,
+                                                            true
+                                                        )
+                                                        txtSpd.text = stats.baseStat.toString()
+                                                    }
                                                 }
-                                                "attack" -> {
-                                                    progressAtk.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtAtk.text = stats.baseStat.toString()
-                                                }
-                                                "defense" -> {
-                                                    progressDef.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtDef.text = stats.baseStat.toString()
-                                                }
-                                                "special-attack" -> {
-                                                    progressSpAtk.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtSpAtk.text = stats.baseStat.toString()
-                                                }
-                                                "special-defense" -> {
-                                                    progressSpDef.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtSpDef.text = stats.baseStat.toString()
-                                                }
-                                                else -> {
-                                                    Timber.e("SPD: ${ceil(stats.baseStat.toDouble() / 255 * 100).toInt()}")
-                                                    progressSpd.setProgressCompat(
-                                                        stats.baseStat,
-                                                        true
-                                                    )
-                                                    txtSpd.text = stats.baseStat.toString()
-                                                }
+
                                             }
 
                                         }
 
-                                    }
-
-                                    // Species Flavor Text
-                                    val sb = StringBuffer()
-                                    species.data?.flavorTextEntries?.distinctBy { text ->
-                                        text.flavorText
-                                    }?.filter { text ->
-                                        text.language.name == "en"
-                                    }?.forEachIndexed { index, flavorTextEntry ->
-                                        if (index < 3) {
-                                            sb.append(
-                                                "${
-                                                    flavorTextEntry.flavorText.replace(
-                                                        "\n",
-                                                        " "
-                                                    )
-                                                } "
-                                            )
+                                        // Species Flavor Text
+                                        val sb = StringBuffer()
+                                        species.data?.flavorTextEntries?.distinctBy { text ->
+                                            text.flavorText
+                                        }?.filter { text ->
+                                            text.language.name == "en"
+                                        }?.forEachIndexed { index, flavorTextEntry ->
+                                            if (index < 3) {
+                                                sb.append(
+                                                    "${
+                                                        flavorTextEntry.flavorText.replace(
+                                                            "\n",
+                                                            " "
+                                                        )
+                                                    } "
+                                                )
+                                            }
                                         }
+                                        binding?.textFlavour?.text = sb.toString()
                                     }
-                                    binding?.textFlavour?.text = sb.toString()
                                 }
                             }
-                        }
-                    }.filterNotNull().collect()
+                        }.filterNotNull().collect()
 
-                viewModel.getSingleFav(it)?.collect { model ->
-                    if (model?.id != null) {
-                        binding?.btnFav?.setImageResource(R.drawable.ic_favorite_24)
-                        binding?.btnFav?.imageTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                this@DetailActivity,
-                                R.color.pink
+                    viewModel.getSingleFav(it)?.collect { model ->
+                        if (model?.id != null) {
+                            binding?.btnFav?.setImageResource(R.drawable.ic_favorite_24)
+                            binding?.btnFav?.imageTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    this@DetailActivity,
+                                    R.color.pink
+                                )
                             )
-                        )
-                    } else {
-                        binding?.btnFav?.setImageResource(R.drawable.ic_unfavorite_24)
+                        } else {
+                            binding?.btnFav?.setImageResource(R.drawable.ic_unfavorite_24)
+                        }
                     }
                 }
             }
